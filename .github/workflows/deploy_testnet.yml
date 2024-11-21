@@ -15,8 +15,7 @@ run-name: Deploy Relayers to Testnet - ${{ inputs.release_tag }} by @${{ github.
 
 env:
   ENVIRONMENT: 'TESTNET'
-  REGISTRY: 'docker.io'
-  IMAGE_MANE: 'sygmatest/sygma-relayer'
+  REGISTRY: 'sygmatest'
   TAG: 'stable'
   DOCKER_CONTENT_TRUST: '1' # Enable signing of images
 
@@ -47,7 +46,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.IMAGE_MANE }}:${{ env.TAG }},${{ env.IMAGE_MANE }}:${{ github.ref_name }}
+          tags: ${{ env.REGISTRY }}/${{ github.event.repository.name }}:${{ env.TAG }},${{ env.REGISTRY }}/${{ github.event.repository.name }}:${{ github.ref_name }}
 
 
 #      - name: build / tag / push docker image into ghcr
